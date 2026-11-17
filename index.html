@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f6fa">
+  <meta name="description" content="A simple, bilingual to-do list with priorities and sorting.">
+  <title>Taskflow — To-Do List</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" data-i18n-aria="brandLabel">
+        <span class="brand-mark" aria-hidden="true">✓</span>
+        <span>taskflow</span>
+      </a>
+      <div class="header-actions">
+        <button class="icon-button" id="theme-toggle" type="button" data-i18n-aria="themeDark">
+          <span id="theme-icon" aria-hidden="true">☾</span>
+        </button>
+        <label class="sr-only" for="language-select">Language</label>
+        <select id="language-select" class="language-select" data-i18n-aria="languageLabel">
+          <option value="ru">RU</option>
+          <option value="en">EN</option>
+        </select>
+      </div>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow" data-i18n="eyebrow">YOUR PERSONAL SPACE</p>
+      <h1 data-i18n="title">A little progress every day.</h1>
+      <p class="subtitle" data-i18n="subtitle">Keep your plans clear and your focus close.</p>
+    </section>
+
+    <section class="todo-card" aria-labelledby="list-heading">
+      <form id="task-form" class="task-form">
+        <label class="sr-only" for="task-input" data-i18n="taskPlaceholder">What needs to be done?</label>
+        <input id="task-input" name="task" type="text" maxlength="180"
+          data-i18n-placeholder="taskPlaceholder" placeholder="What needs to be done?"
+          autocomplete="off">
+        <label class="sr-only" for="priority-select" data-i18n="priority">Priority</label>
+        <select id="priority-select" class="priority-select" data-i18n-aria="priority">
+          <option value="low" data-i18n="low">Low</option>
+          <option value="medium" selected data-i18n="medium">Medium</option>
+          <option value="high" data-i18n="high">High</option>
+        </select>
+        <button class="add-button" type="submit" data-i18n="add">Add task</button>
+      </form>
+
+      <div class="list-toolbar">
+        <div>
+          <h2 id="list-heading" data-i18n="myTasks">My tasks</h2>
+          <p id="task-count" class="task-count" aria-live="polite">0 of 0 left</p>
+        </div>
+        <button id="clear-completed" class="text-button" type="button" data-i18n="clearCompleted">Clear completed</button>
+      </div>
+
+      <div class="list-controls">
+        <nav class="filters" data-i18n-aria="filtersLabel">
+          <button class="filter-button is-active" type="button" data-filter="all" data-i18n="all">All</button>
+          <button class="filter-button" type="button" data-filter="active" data-i18n="active">Active</button>
+          <button class="filter-button" type="button" data-filter="completed" data-i18n="completed">Completed</button>
+        </nav>
+        <label class="sort-label">
+          <span class="sr-only" data-i18n="sortLabel">Sort by</span>
+          <select id="sort-select" class="sort-select" data-i18n-aria="sortLabel">
+            <option value="created" data-i18n="sortCreated">Newest first</option>
+            <option value="priority" data-i18n="sortPriority">By priority</option>
+            <option value="alpha" data-i18n="sortAlpha">A → Z</option>
+            <option value="alpha-desc" data-i18n="sortAlphaDesc">Z → A</option>
+          </select>
+        </label>
+      </div>
+
+      <ul id="task-list" class="task-list" aria-live="polite"></ul>
+
+      <div id="empty-state" class="empty-state" hidden>
+        <div class="empty-illustration" aria-hidden="true">
+          <span class="empty-sun"></span>
+          <span class="empty-check">✓</span>
+        </div>
+        <h3 data-i18n="emptyTitle">No tasks yet</h3>
+        <p data-i18n="emptyText">Add your first one and make today count.</p>
+      </div>
+
+      <footer class="card-footer">
+        <span data-i18n="localHint">Saved on this device</span>
+      </footer>
+    </section>
+
+    <p class="page-note" data-i18n="pageNote">Make space for what matters.</p>
+  </main>
+
+  <template id="task-template">
+    <li class="task-item">
+      <input class="task-checkbox" type="checkbox">
+      <div class="task-content">
+        <span class="task-text"></span>
+        <span class="task-meta">
+          <span class="priority-dot"></span>
+        </span>
+      </div>
+      <select class="task-priority" data-i18n-aria="changePriority">
+        <option value="low" data-i18n="low">Low</option>
+        <option value="medium" data-i18n="medium">Medium</option>
+        <option value="high" data-i18n="high">High</option>
+      </select>
+      <button class="delete-button" type="button" data-i18n-aria="delete" data-i18n-title="delete">×</button>
+    </li>
+  </template>
+</body>
+</html>
